@@ -81,12 +81,30 @@ public class MyLinkedList<T extends Comparable<T>> {
 					first=node.getNext();
 				}else {//Si la lista ordenada solo tiene un elemento
 					first=null;
-				}
-				
+				}			
 			}
-
+		}	
+	}
+	
+	public Node<T> getNode(Node<T>searchedNode){
+		if(first!=null) {
+			return lookForNode(searchedNode, first);
+		}else {
+			return null;
+		}	
+	}
+	
+	public Node<T> lookForNode(Node<T>searchedNode, Node<T>actualNode){
+		if(searchedNode==actualNode) {
+			return actualNode;
 		}
-		
+		else {
+			if(actualNode.getNext()!=null) {
+				return lookForNode(searchedNode, actualNode.getNext());
+			}else {
+				return null;
+			}
+		}
 	}
 	
 	
