@@ -2,14 +2,16 @@ package model;
 
 public class Node<T extends Comparable<T>> {
 	
-	private T variableT;
-	private Object object;
+	//Attribute
+	private T element;
+	
+	//Relations
 	private Node<T>previous;
 	private Node<T>next;
 	
-	public Node(T element, Object object) {
-		setVariableT(element);
-		this.setObject(object);
+	//Constructor
+	public Node(T element) {
+		this.element = element;
 		previous = null;
 		next = null;		
 	}
@@ -32,27 +34,15 @@ public class Node<T extends Comparable<T>> {
 		return previous;
 	}
 	
-	public void setVariableT(T variableT) {
-		this.variableT = variableT;
+	public void setElement(T element) {
+		this.element = element;
 	}
 
-	public T getVariableT() {
-		return variableT;
+	public T getElement() {
+		return element;
 	}
 	
 
-	public void setObject(Object object) {
-		this.object = object;
-	}
-
-	public Object getObject() {
-		return object;
-	}
-
-
-	public int compareTo(T variableT2) {		
-		return this.variableT.compareTo(variableT2);
-	}
 
 
 

@@ -1,6 +1,6 @@
 package model;
 
-public class MyLinkedList<T> {
+public class MyLinkedList<T extends Comparable<T>> {
 	
 	private Node<T> first;
 
@@ -9,37 +9,31 @@ public class MyLinkedList<T> {
 		
 	}
 	
-	//Methos createNode
+	//Methods createNode
 	public void createNode(T element) {
-		Node<T> newNode = new Node<T>(element,null);
+		Node<T> newNode = new Node<T>(element);
 		
-		if (first.getNext()!=null) {
-			insertNode(newNode,first,first.getNext());
+		if (first == null) {			
+			first = newNode;
+			
 		}else {
-			insertNode(newNode,first,null);
-		}				
+			insertNode(newNode,first,first.getNext());			
+		}						
 	}
 	
 	//Method to add node in order
 	public void insertNode(Node<T> newNode, Node<T>nodePrev, Node<T>nodeNext) {
-		if (first == null) {
-			first = newNode;
-		}else {
+
+		if (newNode.getElement().compareTo(nodePrev.getElement())>0 && nodePrev.getNext() == null) {
+			nodePrev.setNext(newNode);
+		}else if (newNode.getElement().compareTo(nodePrev.getElement())>0 && newNode.getElement().compareTo(nodeNext.getElement())<0){
+			nodePrev.setNext(newNode);
+			nodeNext.setPrevious(newNode);
+			newNode.setNext(nodeNext);
+			newNode.setPrevious(nodePrev);
 			
-			if (nodeNext!=null) {
-				
-				if (newNode.compareTo(nodePrev.getVariableT())>0 && newNode.compareTo(nodeNext.getVariableT())<0) {
-					newNode.setNext(nodeNext);
-					newNode.setPrevious(nodePrev);
-					nodePrev.setNext(newNode);
-					nodeNext.setPrevious(newNode);
-					
-				}else {					 
-					insertNode(newNode,nodeNext,nodeNext.getNext());
-					 
-				}
-			}			
+		}else {
+			insertNode(newNode,nodeNext,nodeNext.getNext());
 		}
 	}
-
 }
