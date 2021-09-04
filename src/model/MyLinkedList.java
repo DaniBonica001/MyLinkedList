@@ -36,4 +36,15 @@ public class MyLinkedList<T extends Comparable<T>> {
 			insertNode(newNode,nodeNext,nodeNext.getNext());
 		}
 	}
+	
+	public boolean isEmpty(MyLinkedList<T> leo) {
+		if(leo.first==null) {
+			return true;
+		}else {
+			return false;
+		}
+
+	}
+	
+	
 }
