@@ -79,6 +79,7 @@ public class MyLinkedList<T extends Comparable<T>> {
 				if(node.getNext()!=null) {//Si node(el primero) tiene siguiente entonces que al siguiente le quite la relacion con node
 					node.getNext().setPrevious(null);
 					first=node.getNext();
+					node.setNext(null);
 				}else {//Si la lista ordenada solo tiene un elemento
 					first=null;
 				}			
@@ -94,7 +95,7 @@ public class MyLinkedList<T extends Comparable<T>> {
 		}	
 	}
 	
-	public Node<T> lookForNode(Node<T>searchedNode, Node<T>actualNode){
+	private Node<T> lookForNode(Node<T>searchedNode, Node<T>actualNode){
 		if(searchedNode==actualNode) {
 			return actualNode;
 		}
