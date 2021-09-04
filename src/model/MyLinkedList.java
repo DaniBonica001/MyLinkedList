@@ -47,8 +47,7 @@ public class MyLinkedList<T extends Comparable<T>> {
 	}
 	
 	//Method to know if there is an existing node
-	public boolean existingNode(Node<T> searchedNode, Node<T> actualNode) {
-		
+	public boolean existingNode(Node<T> searchedNode, Node<T> actualNode) {	
 		if(actualNode!=null) {
 			if(actualNode==searchedNode) {
 				return true;
@@ -61,8 +60,32 @@ public class MyLinkedList<T extends Comparable<T>> {
 			}
 		}else {
 			return false;
-		}
+		}		
+	}
+	
+	//Method that delete an existing node
+	public void deleteNode(Node<T> node) {
+		if(existingNode(node, first)==true) {
+			if(node.getPrevious()!=null) {//Si node tiene anterior
+				if(node.getNext()!=null) {//Si node tiene anterior y siguiente
+					node.getPrevious().setNext(node.getNext());
+					node.getNext().setPrevious(node.getPrevious());
+					node.setNext(null);
+					node.setPrevious(null);
+				}else {//Si node solo tiene anterior
+					node.getPrevious().setNext(null);
+				}
+			}else {//No tiene previous es porque es el first
+				if(node.getNext()!=null) {//Si node(el primero) tiene siguiente entonces que al siguiente le quite la relacion con node
+					node.getNext().setPrevious(null);
+					first=node.getNext();
+				}else {//Si la lista ordenada solo tiene un elemento
+					first=null;
+				}
+				
+			}
 
+		}
 		
 	}
 	
