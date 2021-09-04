@@ -37,14 +37,37 @@ public class MyLinkedList<T extends Comparable<T>> {
 		}
 	}
 	
-	public boolean isEmpty(MyLinkedList<T> leo) {
-		if(leo.first==null) {
+	//Method to know if the Linked List has elements or not
+	public boolean isEmpty() {
+		if(first==null) {
 			return true;
 		}else {
 			return false;
 		}
-
 	}
+	
+	//Method to know if there is an existing node
+	public boolean existingNode(Node<T> searchedNode, Node<T> actualNode) {
+		
+		if(actualNode!=null) {
+			if(actualNode==searchedNode) {
+				return true;
+			}else {
+				if(actualNode.getNext()!=null) {
+					return existingNode(searchedNode, actualNode.getNext());
+				}else {
+					return false;
+				}
+			}
+		}else {
+			return false;
+		}
+
+		
+	}
+	
+	
+	
 	
 	
 }
