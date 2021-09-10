@@ -1,8 +1,9 @@
 package model;
 
-public class MyLinkedList<T extends Comparable<T>> {
+@SuppressWarnings("hiding")
+public class MyLinkedList<Objets extends Comparable<Objets>> {
 	
-	private Node<T> first;
+	private Node<Objets> first;
 
 	//Constructor
 	public MyLinkedList() {
@@ -10,8 +11,8 @@ public class MyLinkedList<T extends Comparable<T>> {
 	}
 	
 	//Methods createNode
-	public void createNode(T element) {
-		Node<T> newNode = new Node<T>(element);
+	public void createNode(Objets element) {
+		Node<Objets> newNode = new Node<Objets>(element);
 		
 		if (first == null) {			
 			first = newNode;
@@ -22,10 +23,27 @@ public class MyLinkedList<T extends Comparable<T>> {
 	}
 	
 	//Method to add node in order
-	public void insertNode(Node<T> newNode, Node<T>nodePrev, Node<T>nodeNext) {
-
-		if (newNode.getElement().compareTo(nodePrev.getElement())>0 && nodePrev.getNext() == null) {
-			nodePrev.setNext(newNode);
+	public void insertNode(Node<Objets> newNode, Node<Objets>nodePrev, Node<Objets>nodeNext) {
+			
+		if (nodeNext == null) {
+			if (nodePrev == first && newNode.getElement().compareTo(nodePrev.getElement())>0) {
+				nodePrev.setNext(newNode);
+			
+			}else if (nodePrev == first && newNode.getElement().compareTo(nodePrev.getElement())<0 ) {
+				nodePrev.setPrevious(newNode);
+				first = newNode;
+				first.setNext(nodePrev);			
+			
+			}else if (newNode.getElement().compareTo(nodePrev.getElement())==0 ) {
+				nodePrev.setNext(newNode);
+				newNode.setPrevious(nodePrev);
+			
+			}else if (newNode.getElement().compareTo(nodePrev.getElement())>0) {
+				nodePrev.setNext(newNode);
+				newNode.setPrevious(nodePrev);
+				
+			}			
+			
 		}else if (newNode.getElement().compareTo(nodePrev.getElement())>0 && newNode.getElement().compareTo(nodeNext.getElement())<0){
 			nodePrev.setNext(newNode);
 			nodeNext.setPrevious(newNode);
@@ -33,8 +51,8 @@ public class MyLinkedList<T extends Comparable<T>> {
 			newNode.setPrevious(nodePrev);
 			
 		}else {
-			insertNode(newNode,nodeNext,nodeNext.getNext());
-		}
+			  insertNode(newNode,nodeNext,nodeNext.getNext());
+		}		
 	}
 	
 	//Method to know if the Linked List has elements or not
@@ -47,7 +65,7 @@ public class MyLinkedList<T extends Comparable<T>> {
 	}
 	
 	//Method to know if there is an existing node
-	public boolean existingNode(Node<T> searchedNode, Node<T> actualNode) {	
+	public boolean existingNode(Node<Objets> searchedNode, Node<Objets> actualNode) {	
 		if(actualNode!=null) {
 			if(actualNode==searchedNode) {
 				return true;
@@ -64,7 +82,7 @@ public class MyLinkedList<T extends Comparable<T>> {
 	}
 	
 	//Method that delete an existing node
-	public void deleteNode(Node<T> node) {
+	public void deleteNode(Node<Objets> node) {
 		if(existingNode(node, first)==true) {
 			if(node.getPrevious()!=null) {//Si node tiene anterior
 				if(node.getNext()!=null) {//Si node tiene anterior y siguiente
@@ -87,7 +105,7 @@ public class MyLinkedList<T extends Comparable<T>> {
 		}	
 	}
 	
-	public Node<T> getNode(Node<T>searchedNode){
+	public Node<Objets> getNode(Node<Objets>searchedNode){
 		if(first!=null) {
 			return lookForNode(searchedNode, first);
 		}else {
@@ -95,7 +113,7 @@ public class MyLinkedList<T extends Comparable<T>> {
 		}	
 	}
 	
-	private Node<T> lookForNode(Node<T>searchedNode, Node<T>actualNode){
+	private Node<Objets> lookForNode(Node<Objets>searchedNode, Node<Objets>actualNode){
 		if(searchedNode==actualNode) {
 			return actualNode;
 		}
